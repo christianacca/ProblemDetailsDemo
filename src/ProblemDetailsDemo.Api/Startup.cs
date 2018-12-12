@@ -86,7 +86,7 @@ namespace ProblemDetailsDemo.Api
                 });
 
             // Because exceptions are handled polymorphically, this will act as a "catch all" mapping, which is why it's added last.
-            // If an exception other than NotImplementedException and HttpRequestException is thrown, this will handle it.
+            // If an exception other than NotImplementedException is thrown, this will handle it.
             options.Map<Exception>(ex =>
                 new ExceptionProblemDetails(ex, StatusCodes.Status500InternalServerError)
                 {
