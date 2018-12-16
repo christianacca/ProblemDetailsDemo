@@ -66,7 +66,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         [HttpGet("implicit-input-validation")]
         public IActionResult ImplicitInputValidation([FromQuery] AccountInputModel model)
         {
-            // try the following url: mvc/implicit-input-validation?AccountNumber=10
+            // try the following url: mvc/implicit-input-validation
             // note: with the above url you won't even hit this breakpoint - the framework will not even call our Action method
 
             return Ok(model);
