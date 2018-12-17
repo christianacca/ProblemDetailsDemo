@@ -54,22 +54,48 @@ namespace ProblemDetailsDemo.Api.Controllers
                 Status = StatusCodes.Status400BadRequest
             };
 
-            // note: unlike other responses returning a BadRequest results in a content type that is NOT application/problem+json
-            // this is not ideal. To deal with this
-            // * wait for asp.net core 2.2 which should fix the issue
-            // * throw ProblemDetailsException(problem) instead
-
             return BadRequest(problem);
-
         }
 
         [HttpGet("implicit-input-validation")]
-        public IActionResult ImplicitInputValidation([FromQuery] AccountInputModel model)
+        public ActionResult<AccountInputModel> ImplicitInputValidation([FromQuery] AccountInputModel model)
         {
             // try the following url: mvc/implicit-input-validation
             // note: with the above url you won't even hit this breakpoint - the framework will not even call our Action method
 
-            return Ok(model);
+            return model;
+        }
+
+        [HttpGet("explicit-input-validation")]
+        public ActionResult<AccountInputModel> ExplicitInputValidation(int? accountNumber)
+        {
+            if (!accountNumber.HasValue)
+            {
+                ModelState.AddModelError(nameof(accountNumber), $"{nameof(accountNumber)} required");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // this response is converted to use ProblemDetails via ProblemDetailsResultAttribute
+                return BadRequest(ModelState);
+            }
+
+            return new AccountInputModel
+            {
+                AccountNumber = accountNumber,
+                Reference = "Blah"
+            };
+        }
+
+        [HttpGet("missing-resource")]
+        public ActionResult<AccountInputModel> MissingResourse()
+        {
+            // result pipeline:
+            // null
+            // -> ObjectResult(null)
+            // -> NotFoundResult [via NotFoundResultAttribute]
+            // -> ObjectResult(ProblemDetails) [via ClientErrorResultFilter]
+            return null;
         }
     }
 }
