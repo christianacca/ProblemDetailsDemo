@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +33,10 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
                 // keep consistent with asp.net core 2.2 conventions that adds a tracing value
                 ProblemDetailsHelper.SetTraceId(details, HttpContextAccessor.HttpContext);
             };
+
+            // This will map DBConcurrencyException to the 409 Conflict status code.
+            options.Map<DBConcurrencyException>(ex =>
+                new ExceptionProblemDetails(ex, StatusCodes.Status409Conflict));
 
             // This will map NotImplementedException to the 501 Not Implemented status code.
             options.Map<NotImplementedException>(ex =>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
@@ -18,7 +19,7 @@ namespace ProblemDetailsDemo.Api.ExampleMiddleware
             if (context.Request.Path.StartsWithSegments("/middleware", out _, out var remaining))
             {
                 if (remaining.StartsWithSegments("/error"))
-                    throw new Exception("This is an exception thrown from middleware.");
+                    throw new DBConcurrencyException("This is an exception thrown from middleware.");
 
                 if (remaining.StartsWithSegments("/status", out _, out remaining))
                 {
