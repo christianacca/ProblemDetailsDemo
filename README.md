@@ -8,13 +8,7 @@ Uses [Hellang.Middleware.ProblemDetails](https://www.nuget.org/packages/Hellang.
 
 1. `cd src\ProblemDetailsDemo.Api`
 2. `dotnet run`
-3. Browse to MVC controller endpoints
-	* http://localhost:5000/status/406
-	* http://localhost:5000/mvc/error
-	* http://localhost:5000/mvc/validation-result
-	* see `MvcController` class for more example endpoints
-4. Browse to Middleware endpoints:
-	* http://localhost:5000/middleware/status/406
-	* http://localhost:5000/middleware/error
+3. Browse to the swagger UI: http://localhost:5000/swagger
+4. Try out the various endpoints using the swagger UI
 
 For more information about how to use this nuget library see: https://codeopinion.com/http-api-problem-details-in-asp-net-core/

@@ -6,6 +6,8 @@ using ProblemDetailsDemo.Api.ExampleMiddleware;
 using ProblemDetailsDemo.Api.MvcCustomizations;
 using ProblemDetailsDemo.Api.ProblemDetailsConfig;
 
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
+
 namespace ProblemDetailsDemo.Api
 {
     public class Startup
@@ -27,6 +29,17 @@ namespace ProblemDetailsDemo.Api
                     o.Conventions.Add(new ProblemDetailsResultApiConvention());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerDocument(
+                configure =>
+                {
+                    configure.PostProcess = (document) =>
+                    {
+                        document.Info.Version = "v1";
+                        document.Info.Title = "ProblemDetailsDemo";
+                        document.Info.Description = "ASP.NET Core 2.2 Problem Details demo";
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +47,9 @@ namespace ProblemDetailsDemo.Api
         {
             // Hellang.Middleware.ProblemDetails package
             app.UseProblemDetails();
+
+            app.UseSwagger();
+            app.UseSwaggerUi3();
 
             // demo a middleware throwing exceptions or setting StatusCode
             // try browsing to:
