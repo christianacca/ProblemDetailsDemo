@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 namespace ProblemDetailsDemo.Api.MvcCustomizations
 {
-    public abstract class ApiConvention : IControllerModelConvention
+    public abstract class ApiConventionBase : IControllerModelConvention
     {
         void IControllerModelConvention.Apply(ControllerModel controller)
         {
