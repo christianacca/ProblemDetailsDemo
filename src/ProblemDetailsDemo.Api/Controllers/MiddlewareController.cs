@@ -25,7 +25,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         The ProblemDetails to returned can be configured using ProblemDetailsOptions.MapStatusCode
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L21-L22
+        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L23-L32
         ///     </para>
         /// </remarks>
         /// <param name="statusCode">The http status code to return</param>
@@ -48,7 +48,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         ProblemDetailsOptions.Map method
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L24-L33
+        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L20-L21
         ///     </para>
         /// </remarks>
         [HttpGet("error")]
