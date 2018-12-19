@@ -14,19 +14,19 @@ namespace ProblemDetailsDemo.Api.Controllers
     public class MiddlewareController : ControllerBase
     {
         /// <summary>
-        /// Sets the Response.StatusCode to the value supplied
+        ///     Sets the Response.StatusCode to the value supplied
         /// </summary>
         /// <remarks>
-        /// <para>
-        /// Hellang.Middleware.ProblemDetails will return this status code as a ProblemDetails
-        /// response.
-        /// </para>
-        /// <para>
-        /// The ProblemDetails to returned can be configured using ProblemDetailsOptions.MapStatusCode
-        /// </para>
-        /// <para>
-        /// Source code for this endpoint: https://tinyurl.com/problems-middleware#L21-L22
-        /// </para>
+        ///     <para>
+        ///         Hellang.Middleware.ProblemDetails will return this status code as a ProblemDetails
+        ///         response.
+        ///     </para>
+        ///     <para>
+        ///         The ProblemDetails to returned can be configured using ProblemDetailsOptions.MapStatusCode
+        ///     </para>
+        ///     <para>
+        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L21-L22
+        ///     </para>
         /// </remarks>
         /// <param name="statusCode">The http status code to return</param>
         [HttpGet("status/{statusCode}")]
@@ -36,26 +36,27 @@ namespace ProblemDetailsDemo.Api.Controllers
         }
 
         /// <summary>
-        /// Throw a <see cref="DBConcurrencyException"/>
+        ///     Throw a <see cref="DBConcurrencyException" />
         /// </summary>
         /// <remarks>
-        /// <para>
-        /// Hellang.Middleware.ProblemDetails will return a 409 status code
-        /// as a ProblemDetails response.
-        /// </para>
-        /// <para>
-        /// This mapping of exception to status code is configured using
-        /// ProblemDetailsOptions.Map method
-        /// </para>
-        /// <para>
-        /// Source code for this endpoint: https://tinyurl.com/problems-middleware#L24-L33
-        /// </para>
+        ///     <para>
+        ///         Hellang.Middleware.ProblemDetails will return a 409 status code
+        ///         as a ProblemDetails response.
+        ///     </para>
+        ///     <para>
+        ///         This mapping of exception to status code is configured using
+        ///         ProblemDetailsOptions.Map method
+        ///     </para>
+        ///     <para>
+        ///         Source code for this endpoint: https://tinyurl.com/problems-middleware#L24-L33
+        ///     </para>
         /// </remarks>
         [HttpGet("error")]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public IActionResult Error()
         {
-            throw new NotImplementedException($"Endpoint is implemented by middleware class '{nameof(MaybeBadMiddleware)}'");
+            throw new NotImplementedException(
+                $"Endpoint is implemented by middleware class '{nameof(MaybeBadMiddleware)}'");
         }
     }
 }
