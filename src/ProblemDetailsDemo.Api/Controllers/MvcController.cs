@@ -21,6 +21,9 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// <para>
         /// The ProblemDetails to returned can be configured using ProblemDetailsOptions.MapStatusCode
         /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L29-L33
+        /// </para>
         /// </remarks>
         /// <param name="statusCode">The http status code to return</param>
         [HttpGet("status/{statusCode}")]
@@ -40,6 +43,9 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// <para>
         /// This mapping of exception to status code is configured using
         /// ProblemDetailsOptions.Map method
+        /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L51-L56
         /// </para>
         /// </remarks>
         [HttpGet("error")]
@@ -61,6 +67,9 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// This "catch-all" mapping of exception to status code is configured using
         /// ProblemDetailsOptions.Map method
         /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L74-L79
+        /// </para>
         /// </remarks>
         [HttpGet("error-invalid-operation")]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -74,8 +83,13 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// with one ModelState error
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Hellang.Middleware.ProblemDetails will convert the ProblemDetailsException
         /// into a ProblemDetails response
+        /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L94-L106
+        /// </para>
         /// </remarks>
         [HttpGet("error/details")]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
@@ -94,6 +108,11 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// <summary>
         /// Return an custom <see cref="ProblemDetails"/> using a <see cref="BadRequestObjectResult"/>
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L116-L132
+        /// </para>
+        /// </remarks>
         [HttpGet("validation-result")]
         [ProducesResponseType(typeof(OutOfCreditProblemDetails), StatusCodes.Status400BadRequest)]
         public IActionResult Result()
@@ -116,9 +135,14 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// Example of automatic ASP.Net Core Http model validation
         /// </summary>
         /// <remarks>
+        /// <para>
         /// As of ASP.Net Core 2.1, model validation is performed before the action is executed.
         /// As of ASP.Net Core 2.2, any invalid model will produce a ProblemDetails
         /// response with a list of ModelState errors
+        /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L148-L156
+        /// </para>
         /// </remarks>
         /// <param name="model">A model to validate</param>
         [HttpGet("implicit-input-validation")]
@@ -136,9 +160,14 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// with validation errors
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Asp.Net Core 2.2 needs a little help to ensure the BadRequestObjectResult
         /// containing ModelState errors is returned as a ProblemDetails response.
         /// A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
+        /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L173-L193
+        /// </para>
         /// </remarks>
         /// <param name="accountNumber">value that will be manually validated</param>
         [HttpGet("explicit-input-validation")]
@@ -167,11 +196,16 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// Return a null
         /// </summary>
         /// <remarks>
+        /// <para>
         /// By default, Asp.Net Core 2.2 would produce a 204 No content result.
         /// We change this behaviour using a custom ResultsFilter to return a 404
         /// Not Found result. (see NotFoundResultAttribute).
         /// The built-in ClientErrorResultFilter then converts this into a
         /// ProblemDetails response
+        /// </para>
+        /// <para>
+        /// Source code for this endpoint: https://tinyurl.com/problems-mvc#L210-L220
+        /// </para>
         /// </remarks>
         [HttpGet("missing-resource")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
