@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Bad UI";
+}
+
+<div class="text-center">
+    <h1 class="display-4">HTML Endpoints</h1>
+</div>
+<div class="card">
+    <div class="list-group list-group-flush">
+        <a asp-area="" asp-controller="Bad" asp-action="Status" asp-route-statusCode="409" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Status code 409</h5>
+            </div>
+            <p class="mb-1">Return the status code 409 using a <code>StatusCodeResult</code></p>
+            <small class="text-muted">This will trigger a response from the <code>StatusCodePagesMiddleware</code> that has been configured for UI routes</small>
+        </a>
+        <a asp-area="" asp-controller="Bad" asp-action="ThrowNotImplemented" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Throw a exception</h5>
+            </div>
+            <p class="mb-1">Throw a <code>NotImplementedException</code></p>
+            <small class="text-muted">This will trigger a response from the <code>ExceptionHandlerMiddleware</code> or <code>DeveloperExceptionPageMiddleware</code> that has been configured for UI routes</small>
+        </a>
+        <a asp-area="" asp-controller="Bad" asp-action="MissingViewTemplate" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Missing View template</h5>
+            </div>
+            <p class="mb-1">Cause the MVC framework to generate an exception due whilst execting an action</p>
+            <small class="text-muted">This will trigger a response from the <code>ExceptionHandlerMiddleware</code> or <code>DeveloperExceptionPageMiddleware</code> that has been configured for UI routes</small>
+        </a>
+        <a href="~/ui/Bad/MissingAction" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Missing Action</h5>
+            </div>
+            <p class="mb-1">Cause the MVC framework to generate an exception before an action has been selected</p>
+            <small class="text-muted">This will trigger a response from the <code>StatusCodePagesMiddleware</code> that has been configured for UI routes</small>
+        </a>
+    </div>
+</div>
+

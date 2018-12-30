@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ProblemDetailsDemo.Api.Controllers
+namespace ProblemDetailsDemo.Api.Models
 {
     public class OutOfCreditProblemDetails : ProblemDetails
     {

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Problem Details Demo</h1>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Web API endpoints</h5>
+                <p class="card-text">Use Swagger UI to explore various Problem detail responses from Web API endpoints</p>
+                <a href="~/swagger" class="btn btn-primary">Try</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title text-info">More information</h5>
+                <ul>
+                    <li><a href="https://tools.ietf.org/html/rfc7807">rfc7807</a> - official Problem Details spec</li>
+                    <li><a href="https://github.com/christianacca/ProblemDetailsDemo">Source code</a> for this demo</li>
+                    <li><a href="https://www.nuget.org/packages/Hellang.Middleware.ProblemDetails">Hellang.Middleware.ProblemDetails</a> Nuget library</li>
+                    <li><a href="https://codeopinion.com/http-api-problem-details-in-asp-net-core/">Blog post</a> demonstrating nuget library</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">MVC HTML endpoints</h5>
+                <p class="card-text">Confirm that exceptions / non-success status codes from HTML endpoints are <em>NOT</em> sent as Problem details responses</p>
+                <a asp-area="" asp-controller="Bad" asp-action="Index" class="btn btn-primary">Try</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card border-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title text-info">Serving both HTML and JSON responses?</h5>
+                
+                <p>
+                    If yes, you will need to configure different exception handling middleware for each response type.
+                </p>
+                
+                <p>
+                    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Example code:
+                    </a>
+                    <pre class="collapse" id="collapseExample">
+    <code>
+    app.UseWhen(IsUIRequest, app2 =>
+    {
+        app2.UseExceptionHandler("/ui/home/error");
+        app.UseStatusCodePages();
+    });
+    app.UseWhen(IsNonUIRequest, app2 =>
+    {
+        app2.UseProblemDetails();
+    });</code></pre>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

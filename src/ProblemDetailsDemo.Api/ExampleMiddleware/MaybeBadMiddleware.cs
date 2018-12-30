@@ -15,7 +15,7 @@ namespace ProblemDetailsDemo.Api.ExampleMiddleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.Path.StartsWithSegments("/middleware", out _, out var remaining))
+            if (context.Request.Path.StartsWithSegments("/api-middleware", out _, out var remaining))
             {
                 if (remaining.StartsWithSegments("/error"))
                     throw new DBConcurrencyException("This is an exception thrown from middleware.");

@@ -2,13 +2,14 @@
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProblemDetailsDemo.Api.Models;
 using ProblemDetailsDemo.Api.MvcCustomizations;
 
 namespace ProblemDetailsDemo.Api.Controllers
 {
-    [Route("mvc")]
+    [Route("api-mvc")]
     [ApiController]
-    public class MvcController : ControllerBase
+    public class ApiMvcController : ControllerBase
     {
         /// <summary>
         ///     Return the status code supplied using a <see cref="StatusCodeResult" />
@@ -22,7 +23,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         The ProblemDetails to returned can be configured using ProblemDetailsOptions.MapStatusCode
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L29-L33
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L30-L34
         ///     </para>
         /// </remarks>
         /// <param name="statusCode">The http status code to return</param>
@@ -45,14 +46,14 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         ProblemDetailsOptions.Map method
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L51-L56
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L52-L57
         ///     </para>
         /// </remarks>
         [HttpGet("error")]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status501NotImplemented)]
         public IActionResult Error()
         {
-            throw new NotImplementedException("This is an exception thrown from an MVC controller.");
+            throw new NotImplementedException("This is an exception thrown from an Web API controller.");
         }
 
         /// <summary>
@@ -68,7 +69,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         ProblemDetailsOptions.Map method
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L74-L79
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L75-L80
         ///     </para>
         /// </remarks>
         [HttpGet("error-invalid-operation")]
@@ -88,7 +89,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         into a ProblemDetails response
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L94-L106
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L95-L107
         ///     </para>
         /// </remarks>
         [HttpGet("error/details")]
@@ -110,7 +111,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L116-L132
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L117-L133
         ///     </para>
         /// </remarks>
         [HttpGet("validation-result")]
@@ -141,7 +142,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         response with a list of ModelState errors
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L148-L156
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L149-L157
         ///     </para>
         /// </remarks>
         /// <param name="model">A model to validate</param>
@@ -166,7 +167,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L173-L193
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L174-L194
         ///     </para>
         /// </remarks>
         /// <param name="accountNumber">value that will be manually validated</param>
@@ -204,7 +205,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         ProblemDetails response
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-mvc#L210-L220
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L211-L221
         ///     </para>
         /// </remarks>
         [HttpGet("missing-resource")]

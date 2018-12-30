@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProblemDetailsDemo.Api.Controllers
+namespace ProblemDetailsDemo.Api.Models
 {
     public class AccountInputModel
     {

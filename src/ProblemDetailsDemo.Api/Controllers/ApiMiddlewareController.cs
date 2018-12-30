@@ -9,9 +9,9 @@ namespace ProblemDetailsDemo.Api.Controllers
     /// <summary>
     ///     Fake controller used to generate Swagger / OpenAPI documentation for <see cref="MaybeBadMiddleware" />
     /// </summary>
-    [Route("middleware")]
+    [Route("api-middleware")]
     [ApiController]
-    public class MiddlewareController : ControllerBase
+    public class ApiMiddlewareController : ControllerBase
     {
         /// <summary>
         ///     Sets the Response.StatusCode to the value supplied

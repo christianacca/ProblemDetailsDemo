@@ -11,14 +11,14 @@ how an MVC action result or raw middleware response is converted to a ProblemDet
 
 ## Try examples online
 
-1. Browse to swagger UI: https://problem-details-demo.azurewebsites.net/swagger
-4. Try out the various endpoints using the swagger UI 
+1. Browse to : https://problem-details-demo.azurewebsites.net
+4. Try out the various endpoints using the swagger UI
 
 ## Try examples locally
 
 1. `cd src\ProblemDetailsDemo.Api`
-2. `dotnet run`
-3. Browse to the swagger UI: http://localhost:5000/swagger
+2. `dotnet run` or `dotnet run --launch-profile ProblemDetailsDemo.Api.Production`
+3. Browse to: http://localhost:5000
 4. Try out the various endpoints using the swagger UI
 
 ## Additional resources
