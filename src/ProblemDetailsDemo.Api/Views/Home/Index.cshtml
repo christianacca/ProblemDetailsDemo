@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
 <div class="text-center">
@@ -57,7 +57,7 @@
     app.UseWhen(IsUIRequest, app2 =>
     {
         app2.UseExceptionHandler("/ui/home/error");
-        app.UseStatusCodePages();
+        app2.UseStatusCodePages();
     });
     app.UseWhen(IsNonUIRequest, app2 =>
     {
