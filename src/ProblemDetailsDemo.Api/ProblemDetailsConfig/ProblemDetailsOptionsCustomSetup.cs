@@ -28,7 +28,7 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
 
             options.MapStatusCode = MapStatusCode;
 
-            options.OnBeforeWriteDetails = details =>
+            options.OnBeforeWriteDetails = (ctx, details) =>
             {
                 // keep consistent with asp.net core 2.2 conventions that adds a tracing value
                 ProblemDetailsHelper.SetTraceId(details, HttpContextAccessor.HttpContext);
@@ -43,7 +43,7 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
                 new ExceptionProblemDetails(ex, StatusCodes.Status501NotImplemented));
         }
 
-        private ProblemDetails MapStatusCode(int statusCode)
+        private ProblemDetails MapStatusCode(HttpContext context, int statusCode)
         {
             if (!ApiOptions.SuppressMapClientErrors &&
                 ApiOptions.ClientErrorMapping.TryGetValue(statusCode, out var errorData))
@@ -58,7 +58,7 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
             }
             else
             {
-                // use Hellang.Middleware.ProblemDetails maping
+                // use Hellang.Middleware.ProblemDetails mapping
                 return new StatusCodeProblemDetails(statusCode);
             }
         }
