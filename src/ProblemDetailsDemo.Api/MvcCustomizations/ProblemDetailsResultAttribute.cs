@@ -7,7 +7,7 @@ using ProblemDetailsDemo.Api.ProblemDetailsConfig;
 namespace ProblemDetailsDemo.Api.MvcCustomizations
 {
     /// <summary>
-    ///     Ensure <see cref="BadRequestResult" /> explicity returned by a controller action
+    ///     Ensure <see cref="BadRequestResult" /> explicitly returned by a controller action
     ///     has the same shape as automatic HTTP 400 responses produced by the framework
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
@@ -25,12 +25,12 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
                 //   `return BadRequest(new ValidationProblemDetails(ModelState));`
 
                 var problemDetails = ToValidationProblemDetails(errors);
-                context.Result = badRequest = new BadRequestObjectResult(problemDetails);
+                context.Result = new BadRequestObjectResult(problemDetails);
             }
 
             if (badRequest.Value is ProblemDetails details)
             {
-                // keep consistent with asp.net core 2.2 conventions that adds a tracing value
+                // keep consistent with asp.net core 2.2+ conventions that adds a tracing value
                 ProblemDetailsHelper.SetTraceId(details, context.HttpContext);
             }
         }
@@ -44,7 +44,10 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
             var validationErrors = serializableError
                 .Where(x => x.Value is string[])
                 .ToDictionary(x => x.Key, x => x.Value as string[]);
-            return new ValidationProblemDetails(validationErrors);
+            return new ValidationProblemDetails(validationErrors)
+            {
+              Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+            };
         }
     }
 }

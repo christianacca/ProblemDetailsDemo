@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ProblemDetailsDemo.Api.ExampleMiddleware;
 using ProblemDetailsDemo.Api.MvcCustomizations;
 using ProblemDetailsDemo.Api.ProblemDetailsConfig;
@@ -17,12 +18,12 @@ namespace ProblemDetailsDemo.Api
     {
         private const string UIRoutePrefix = "ui";
 
-        public Startup(IHostingEnvironment environment)
+        public Startup(IWebHostEnvironment environment)
         {
             Environment = environment;
         }
 
-        private IHostingEnvironment Environment { get; }
+        private IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,13 +35,14 @@ namespace ProblemDetailsDemo.Api
             services.AddProblemDetails();
 
             services
-                .AddMvc(o =>
+                .AddControllersWithViews(o =>
                 {
                     // optional tweaks to built-in mvc non-success http responses
                     o.Conventions.Add(new NotFoundResultApiConvention());
                     o.Conventions.Add(new ProblemDetailsResultApiConvention());
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                    // todo: switch to endpoint routing
+                    o.EnableEndpointRouting = false;
+                });
 
             services.AddSwaggerDocument(
                 configure =>
@@ -49,7 +51,7 @@ namespace ProblemDetailsDemo.Api
                     {
                         document.Info.Version = "v1";
                         document.Info.Title = "ProblemDetailsDemo";
-                        document.Info.Description = "ASP.NET Core 2.2 Problem Details demo";
+                        document.Info.Description = "ASP.NET Core 3.1 Problem Details demo";
                     };
                 });
         }
@@ -61,7 +63,7 @@ namespace ProblemDetailsDemo.Api
 
             app.UseStaticFiles();
 
-            app.UseSwagger();
+            app.UseOpenApi();
             app.UseSwaggerUi3();
 
             // demo a middleware throwing exceptions or setting StatusCode
@@ -70,6 +72,7 @@ namespace ProblemDetailsDemo.Api
             // - middleware/status/nnn (replacing nnn with a http status code eg 501)
             app.UseMiddleware<MaybeBadMiddleware>();
 
+            // todo: switch to endpoint routing
             app.UseMvc(routes =>
             {
                 routes.MapRoute("home", "", new { controller = "Home", action = "Index"});

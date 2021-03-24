@@ -162,7 +162,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         Asp.Net Core 2.2 needs a little help to ensure the BadRequestObjectResult
+        ///         Asp.Net Core 2.2+ needs a little help to ensure the BadRequestObjectResult
         ///         containing ModelState errors is returned as a ProblemDetails response.
         ///         A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
         ///     </para>
@@ -198,7 +198,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         /// </summary>
         /// <remarks>
         ///     <para>
-        ///         By default, Asp.Net Core 2.2 would produce a 204 No content result.
+        ///         By default, Asp.Net Core 2.2+ would produce a 204 No content result.
         ///         We change this behaviour using a custom ResultsFilter to return a 404
         ///         Not Found result. (see NotFoundResultAttribute).
         ///         The built-in ClientErrorResultFilter then converts this into a

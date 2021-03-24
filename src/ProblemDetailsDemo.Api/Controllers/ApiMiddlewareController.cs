@@ -8,6 +8,7 @@ namespace ProblemDetailsDemo.Api.Controllers
 {
     /// <summary>
     ///     Fake controller used to generate Swagger / OpenAPI documentation for <see cref="MaybeBadMiddleware" />
+    ///     // todo: switch to endpoint routing and then see if this controller can be dropped
     /// </summary>
     [Route("api-middleware")]
     [ApiController]
