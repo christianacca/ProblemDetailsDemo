@@ -1,5 +1,6 @@
 ﻿using System;
 using Hellang.Middleware.ProblemDetails;
+// using Hellang.Middleware.ProblemDetails.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,15 @@ namespace ProblemDetailsDemo.Api
                     // todo: switch to endpoint routing
                     o.EnableEndpointRouting = false;
                 });
+                // AddProblemDetailsConventions: is an alternative to conventions that this project sets up;
+                // differences:
+                // * AddProblemDetailsConventions: implicit model validation produces a 422 response
+                // * This project: implicit model validation produces a 400 response
+                // * AddProblemDetailsConventions: Type property set to https://httpstatuses.com/xxx
+                // * This project: Type property set using MVC's built-in client error mapping
+                // * AddProblemDetailsConventions: BadRequest(ModelState) does NOT produce a problem detail response
+                // * This project:  BadRequest(ModelState) produces a problem detail response
+                // .AddProblemDetailsConventions();
 
             services.AddSwaggerDocument(
                 configure =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ProblemDetailsDemo.Api.ProblemDetailsConfig;
@@ -13,6 +14,8 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
     public class ProblemDetailsResultAttribute : Attribute, IAlwaysRunResultFilter
     {
+        private static readonly string BadRequestType = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+
         public void OnResultExecuting(ResultExecutingContext context)
         {
             if (!(context.Result is BadRequestObjectResult badRequest)) return;
@@ -26,6 +29,21 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
 
                 var problemDetails = ToValidationProblemDetails(errors);
                 context.Result = new BadRequestObjectResult(problemDetails);
+            }
+
+            if (badRequest.Value is string detail)
+            {
+              // make controller actions that do this:
+              //   `return BadRequest(ModelState);`
+              // as though they did this instead:
+              //   `return BadRequest(new ValidationProblemDetails(ModelState));`
+
+              var problemDetails = new StatusCodeProblemDetails(400)
+              {
+                Type = BadRequestType,
+                Detail = detail
+              };
+              context.Result = new BadRequestObjectResult(problemDetails);
             }
 
             if (badRequest.Value is ProblemDetails details)
@@ -46,7 +64,7 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
                 .ToDictionary(x => x.Key, x => x.Value as string[]);
             return new ValidationProblemDetails(validationErrors)
             {
-              Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+              Type = BadRequestType
             };
         }
     }

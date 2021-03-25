@@ -24,3 +24,7 @@ how an MVC action result or raw middleware response is converted to a ProblemDet
 ## Additional resources
 
 * blog post demonstrating nuget library see: https://codeopinion.com/http-api-problem-details-in-asp-net-core/
+
+## Contributing
+
+* [Azure devops home page](https://portal.azure.com/#@1fc77a15-c288-4b03-b784-6fe873fb256e/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/VstsRG-christianacca-0ac1/providers/Microsoft.DevOps/pipelines/ProblemDetailsDemo)

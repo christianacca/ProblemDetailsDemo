@@ -194,6 +194,27 @@ namespace ProblemDetailsDemo.Api.Controllers
         }
 
         /// <summary>
+        ///     Example of manual Http model validation, returning a <see cref="BadRequestObjectResult" />
+        ///     with a string message
+        /// </summary>
+        /// <remarks>
+        ///     <para>
+        ///         Asp.Net Core 2.2+ needs a little help to ensure the BadRequestObjectResult
+        ///         containing string message is returned as a ProblemDetails response.
+        ///         A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
+        ///     </para>
+        ///     <para>
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L210-L215
+        ///     </para>
+        /// </remarks>
+        [HttpGet("detail")]
+        [ApiConventionMethod(typeof(ApiConventions), nameof(ApiConventions.ValidatedGet))]
+        public ActionResult<string> Detail()
+        {
+            return BadRequest("This will end up in the 'detail' field.");
+        }
+
+        /// <summary>
         ///     Return a null
         /// </summary>
         /// <remarks>
@@ -205,7 +226,7 @@ namespace ProblemDetailsDemo.Api.Controllers
         ///         ProblemDetails response
         ///     </para>
         ///     <para>
-        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L211-L221
+        ///         Source code for this endpoint: https://tinyurl.com/problems-api#L232-L242
         ///     </para>
         /// </remarks>
         [HttpGet("missing-resource")]
