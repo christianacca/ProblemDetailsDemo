@@ -28,29 +28,33 @@ namespace ProblemDetailsDemo.Api.MvcCustomizations
                 //   `return BadRequest(new ValidationProblemDetails(ModelState));`
 
                 var problemDetails = ToValidationProblemDetails(errors);
-                context.Result = new BadRequestObjectResult(problemDetails);
+                SetBadResponseProblemDetails(context, problemDetails);
             }
 
             if (badRequest.Value is string detail)
             {
               // make controller actions that do this:
-              //   `return BadRequest(ModelState);`
+              //   `return BadRequest("Something bad");`
               // as though they did this instead:
-              //   `return BadRequest(new ValidationProblemDetails(ModelState));`
+              //   ```
+              //   var badResponse = new StatusCodeProblemDetails(400) { Detail = "Something bad" };
+              //   throw new ProblemDetailsException(badResponse);
+              //   ```
 
               var problemDetails = new StatusCodeProblemDetails(400)
               {
                 Type = BadRequestType,
                 Detail = detail
               };
-              context.Result = new BadRequestObjectResult(problemDetails);
+              SetBadResponseProblemDetails(context, problemDetails);
             }
+        }
 
-            if (badRequest.Value is ProblemDetails details)
-            {
-                // keep consistent with asp.net core 2.2+ conventions that adds a tracing value
-                ProblemDetailsHelper.SetTraceId(details, context.HttpContext);
-            }
+        private static void SetBadResponseProblemDetails(ResultExecutingContext context, ProblemDetails problemDetails)
+        {
+          // keep consistent with asp.net core 2.2+ conventions that adds a tracing value
+          ProblemDetailsHelper.SetTraceId(problemDetails, context.HttpContext);
+          context.Result = new BadRequestObjectResult(problemDetails);
         }
 
         public void OnResultExecuted(ResultExecutedContext context)
