@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +20,10 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
             options.MapStatusCode = MapStatusCode;
 
             // This will map DBConcurrencyException to the 409 Conflict status code.
-            options.Map<DBConcurrencyException>(ex =>
-                new StatusCodeProblemDetails(StatusCodes.Status409Conflict));
+            options.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status409Conflict);
 
             // This will map NotImplementedException to the 501 Not Implemented status code.
-            options.Map<NotImplementedException>(ex =>
-                new StatusCodeProblemDetails(StatusCodes.Status501NotImplemented));
+            options.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status501NotImplemented);
         }
 
         private ProblemDetails MapStatusCode(HttpContext context)
@@ -34,7 +31,7 @@ namespace ProblemDetailsDemo.Api.ProblemDetailsConfig
             if (!ApiOptions.SuppressMapClientErrors &&
                 ApiOptions.ClientErrorMapping.TryGetValue(context.Response.StatusCode, out var errorData))
             {
-                // prefer the built-in mapping in asp.net core
+                // prefer the built-in MVC client error mapping in asp.net core
                 return new ProblemDetails
                 {
                     Status = context.Response.StatusCode,
