@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Data;
 using Hellang.Middleware.ProblemDetails;
-// using Hellang.Middleware.ProblemDetails.Mvc;
+using Hellang.Middleware.ProblemDetails.Mvc;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProblemDetailsDemo.Api.ExampleMiddleware;
 using ProblemDetailsDemo.Api.MvcCustomizations;
-using ProblemDetailsDemo.Api.ProblemDetailsConfig;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
@@ -31,28 +31,23 @@ namespace ProblemDetailsDemo.Api
         {
             services.AddHttpContextAccessor();
 
-            services.ConfigureOptions<ProblemDetailsOptionsCustomSetup>();
             // Hellang.Middleware.ProblemDetails package
-            services.AddProblemDetails();
+            services.AddProblemDetails(o =>
+            {
+                o.ValidationProblemStatusCode = StatusCodes.Status400BadRequest;
+                o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status409Conflict);
+                o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status501NotImplemented);
+            });
 
             services
                 .AddControllersWithViews(o =>
                 {
                     // optional tweaks to built-in mvc non-success http responses
                     o.Conventions.Add(new NotFoundResultApiConvention());
-                    o.Conventions.Add(new ProblemDetailsResultApiConvention());
                     // todo: switch to endpoint routing
                     o.EnableEndpointRouting = false;
-                });
-                // AddProblemDetailsConventions: is an alternative to conventions that this project sets up;
-                // differences:
-                // * AddProblemDetailsConventions: implicit model validation produces a 422 response
-                // * This project: implicit model validation produces a 400 response
-                // * AddProblemDetailsConventions: Type property set to https://httpstatuses.com/xxx
-                // * This project: Type property set using MVC's built-in client error mapping
-                // * AddProblemDetailsConventions: BadRequest(ModelState) does NOT produce a problem detail response
-                // * This project:  BadRequest(ModelState) produces a problem detail response
-                // .AddProblemDetailsConventions();
+                })
+                .AddProblemDetailsConventions();
 
             services.AddSwaggerDocument(
                 configure =>
