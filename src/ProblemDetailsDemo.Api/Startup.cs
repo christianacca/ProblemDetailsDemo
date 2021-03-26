@@ -44,8 +44,6 @@ namespace ProblemDetailsDemo.Api
                 {
                     // optional tweaks to built-in mvc non-success http responses
                     o.Conventions.Add(new NotFoundResultApiConvention());
-                    // todo: switch to endpoint routing
-                    o.EnableEndpointRouting = false;
                 })
                 .AddProblemDetailsConventions();
 
@@ -68,6 +66,8 @@ namespace ProblemDetailsDemo.Api
 
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             app.UseOpenApi();
             app.UseSwaggerUi3();
 
@@ -77,11 +77,11 @@ namespace ProblemDetailsDemo.Api
             // - middleware/status/nnn (replacing nnn with a http status code eg 501)
             app.UseMiddleware<MaybeBadMiddleware>();
 
-            // todo: switch to endpoint routing
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute("home", "", new { controller = "Home", action = "Index"});
-                routes.MapRoute("default", UIRoutePrefix + "/{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                endpoints.MapControllerRoute("home","", new { controller = "Home", action = "Index"});
+                endpoints.MapControllerRoute("default", UIRoutePrefix + "/{controller=Bad}/{action=Index}/{id?}");
             });
         }
 
