@@ -164,7 +164,7 @@ namespace ProblemDetailsDemo.Api.Controllers
     ///   <para>
     ///     Asp.Net Core 2.2+ needs a little help to ensure the BadRequestObjectResult
     ///     containing ModelState errors is returned as a ProblemDetails response.
-    ///     A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
+    ///     A custom ResultsFilter is added to every MVC controller action by the middleware
     ///   </para>
     ///   <para>
     ///     Source code for this endpoint: https://tinyurl.com/problems-api#L174-L194
@@ -201,7 +201,7 @@ namespace ProblemDetailsDemo.Api.Controllers
     ///   <para>
     ///     Asp.Net Core 2.2+ needs a little help to ensure the BadRequestObjectResult
     ///     containing string message is returned as a ProblemDetails response.
-    ///     A custom ResultsFilter is used for this purpose (see ProblemDetailsResultAttribute)
+    ///     A custom ResultsFilter is added to every MVC controller action by the middleware
     ///   </para>
     ///   <para>
     ///     Source code for this endpoint: https://tinyurl.com/problems-api#L210-L215
