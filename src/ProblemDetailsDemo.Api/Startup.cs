@@ -53,6 +53,8 @@ namespace ProblemDetailsDemo.Api
             document.Info.Description = "ASP.NET Core 3.1 Problem Details demo";
           };
         });
+
+      services.AddApplicationInsightsTelemetry();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
