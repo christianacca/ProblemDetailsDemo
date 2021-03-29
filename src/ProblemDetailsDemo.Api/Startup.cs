@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using CcAcca.ApplicationInsights.ProblemDetails;
 using Hellang.Middleware.ProblemDetails;
 using Hellang.Middleware.ProblemDetails.Mvc;
 using Microsoft.AspNetCore.Builder;
@@ -54,7 +55,9 @@ namespace ProblemDetailsDemo.Api
           };
         });
 
-      services.AddApplicationInsightsTelemetry();
+      services
+        .AddApplicationInsightsTelemetry()
+        .AddProblemDetailTelemetryInitializer();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
