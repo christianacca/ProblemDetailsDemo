@@ -32,16 +32,11 @@ namespace ProblemDetailsDemo.Api
     {
       services.AddHttpContextAccessor();
 
-      // Hellang.Middleware.ProblemDetails package
-      services.AddProblemDetails(o => {
-        o.ValidationProblemStatusCode = StatusCodes.Status400BadRequest;
-        o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status409Conflict);
-        o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status501NotImplemented);
-      });
-
+      // Configure ProblemDetails middleware and tune ASP.Net Core MVC to line up with it's conventions
       services
+        .AddProblemDetails(ConfigureProblemDetails)
         .AddControllersWithViews(o => {
-          // optional tweaks to built-in mvc non-success http responses
+          // optional tweak to built-in mvc http responses:
           o.Conventions.Add(new NotFoundResultApiConvention());
         })
         .AddProblemDetailsConventions();
@@ -57,7 +52,7 @@ namespace ProblemDetailsDemo.Api
 
       services
         .AddApplicationInsightsTelemetry()
-        .AddProblemDetailTelemetryInitializer();
+        .AddProblemDetailTelemetryInitializer(); // enrich request telemetry with ProblemDetails
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,9 +80,16 @@ namespace ProblemDetailsDemo.Api
       });
     }
 
+    private void ConfigureProblemDetails(ProblemDetailsOptions o)
+    {
+      o.ValidationProblemStatusCode = StatusCodes.Status400BadRequest;
+      o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status409Conflict);
+      o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status501NotImplemented);
+    }
+
     private static void NonUIExceptionMiddleware(IApplicationBuilder app)
     {
-      // Hellang.Middleware.ProblemDetails package
+      // Hellang.Middleware.ProblemDetails
       app.UseProblemDetails();
     }
 

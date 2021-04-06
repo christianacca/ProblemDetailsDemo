@@ -23,7 +23,10 @@ how an MVC action result or raw middleware response is converted to a ProblemDet
 
 ## Additional resources
 
-* blog post demonstrating nuget library see: https://codeopinion.com/http-api-problem-details-in-asp-net-core/
+* blog post demonstrating nuget library see: 
+   * https://codeopinion.com/http-api-problem-details-in-asp-net-core/
+   * https://andrewlock.net/handling-web-api-exceptions-with-problemdetails-middleware/
+* to enrich MS Application Insight request telementry with ProblemDetail data see: https://github.com/christianacca/ApplicationInsights.ProblemDetails
 
 ## Contributing
 
