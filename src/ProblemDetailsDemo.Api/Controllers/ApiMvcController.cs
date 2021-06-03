@@ -1,4 +1,5 @@
 ﻿using System;
+using CcAcca.LogDimensionCollection.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,7 @@ namespace ProblemDetailsDemo.Api.Controllers
 {
   [Route("api-mvc")]
   [ApiController]
+  [CollectActionArgs]
   public class ApiMvcController : ControllerBase
   {
     /// <summary>

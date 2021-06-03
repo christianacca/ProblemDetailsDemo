@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using CcAcca.ApplicationInsights.ProblemDetails;
+using CcAcca.LogDimensionCollection.AppInsights;
+using CcAcca.LogDimensionCollection.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Hellang.Middleware.ProblemDetails.Mvc;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +42,15 @@ namespace ProblemDetailsDemo.Api
           o.Conventions.Add(new NotFoundResultApiConvention());
         })
         .AddProblemDetailsConventions();
+      
+      services
+        .AddMvcActionDimensionCollection()
+        .AddMvcResultItemsCountDimensionSelector()
+        .AddMvcActionArgDimensionSelector()
+        .ConfigureActionArgDimensionSelector(options => {
+          // note: use with extreme caution and probably never for production workloads!
+          options.AutoCollect = true;
+        });
 
       services.AddSwaggerDocument(
         configure => {
@@ -52,7 +63,12 @@ namespace ProblemDetailsDemo.Api
 
       services
         .AddApplicationInsightsTelemetry()
-        .AddProblemDetailTelemetryInitializer(); // enrich request telemetry with ProblemDetails
+        // enrich request telemetry with ProblemDetails
+        .AddProblemDetailTelemetryInitializer(o => {
+          // only status codes >= 500 treat as a failure
+          o.IsFailure = ProblemDetailsTelemetryOptions.ServerErrorIsFailure;
+        })
+        .AddMvcActionDimensionTelemetryInitializer();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
