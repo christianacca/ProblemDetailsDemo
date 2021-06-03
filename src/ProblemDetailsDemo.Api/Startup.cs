@@ -100,7 +100,7 @@ namespace ProblemDetailsDemo.Api
     {
       o.ValidationProblemStatusCode = StatusCodes.Status400BadRequest;
       o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status409Conflict);
-      o.MapToStatusCode<DBConcurrencyException>(StatusCodes.Status501NotImplemented);
+      o.MapToStatusCode<NotImplementedException>(StatusCodes.Status501NotImplemented);
     }
 
     private static void NonUIExceptionMiddleware(IApplicationBuilder app)
