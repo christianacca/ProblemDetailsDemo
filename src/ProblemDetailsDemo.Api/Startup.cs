@@ -65,8 +65,7 @@ namespace ProblemDetailsDemo.Api
         .AddApplicationInsightsTelemetry()
         // enrich request telemetry with ProblemDetails
         .AddProblemDetailTelemetryInitializer(o => {
-          // only status codes >= 500 treat as a failure
-          o.IsFailure = ProblemDetailsTelemetryOptions.ServerErrorIsFailure;
+          // o.IsFailure = ProblemDetailsTelemetryOptions.ServerErrorIsFailure;
         })
         .AddMvcActionDimensionTelemetryInitializer();
     }
