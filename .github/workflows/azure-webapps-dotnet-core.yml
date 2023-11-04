@@ -20,13 +20,17 @@
 name: Build and deploy ASP.Net Core app to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: problemdetailsdemo2    # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: hellang-problemdetails-demo    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '6'                 # set this to the .NET Core version to use
+  DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -36,6 +40,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BUILD_CONFIGURATION: Release
 
     steps:
       - uses: actions/checkout@v3
@@ -54,10 +60,10 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build -c ${{ env.BUILD_CONFIGURATION }}
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c ${{ env.BUILD_CONFIGURATION }} -o ${{env.DOTNET_ROOT}}/myapp --no-build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -66,6 +72,7 @@ jobs:
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
+    if: contains(fromJSON('["push", "workflow_dispatch"]'), github.event_name)
     permissions:
       contents: none
     runs-on: ubuntu-latest
