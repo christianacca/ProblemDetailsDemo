@@ -1,4 +1,4 @@
-# ProblemDetailsDemo [![Build Status](https://dev.azure.com/christianacca/ProblemDetailsDemo/_apis/build/status/ProblemDetailsDemo%20-%20CI?branchName=master)](https://dev.azure.com/christianacca/ProblemDetailsDemo/_build/latest?definitionId=6&branchName=master)
+# ProblemDetailsDemo ![Build Status](https://github.com/christianacca/ProblemDetailsDemo/actions/workflows/azure-webapps-dotnet-core.yml/badge.svg)
 
 ## Overview
 
