@@ -22,7 +22,7 @@ namespace ProblemDetailsDemo.Api.ExampleMiddleware
 
         if (remaining.StartsWithSegments("/status", out _, out remaining))
         {
-          var statusCodeString = remaining.Value.Trim('/');
+          var statusCodeString = remaining.Value?.Trim('/');
 
           if (int.TryParse(statusCodeString, out var statusCode))
           {

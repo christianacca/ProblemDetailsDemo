@@ -231,7 +231,7 @@ namespace ProblemDetailsDemo.Api.Controllers
     /// </remarks>
     [HttpGet("missing-resource")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public ActionResult<AccountInputModel> MissingResourse()
+    public ActionResult<AccountInputModel>? MissingResource()
     {
       // result pipeline:
       // null

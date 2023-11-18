@@ -6,6 +6,6 @@ namespace ProblemDetailsDemo.Api.Models
   {
     [Required] public int? AccountNumber { get; set; }
 
-    [Required] public string Reference { get; set; }
+    [Required] public string Reference { get; set; } = null!;
   }
 }

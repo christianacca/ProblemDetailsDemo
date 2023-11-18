@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-	<NoWarn>1701;1702;1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<NoWarn>1701;1702;1591;AD0001</NoWarn>
 	<UserSecretsId>9db4e509-61e7-4301-9bbc-15c904c824f3</UserSecretsId>
   </PropertyGroup>
 
