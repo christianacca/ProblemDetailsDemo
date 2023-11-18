@@ -1,7 +1,5 @@
-﻿using System;
-using CcAcca.LogDimensionCollection.AspNetCore;
+﻿using CcAcca.LogDimensionCollection.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProblemDetailsDemo.Api.Models;
 using ProblemDetailsDemo.Api.MvcCustomizations;
