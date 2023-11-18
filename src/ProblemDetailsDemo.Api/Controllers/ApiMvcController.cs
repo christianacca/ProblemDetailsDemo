@@ -218,7 +218,7 @@ namespace ProblemDetailsDemo.Api.Controllers
     ///   Example of returning a <see cref="ConflictResult"/> with a message string
     /// </summary>
     /// <remarks>
-    ///   Source code for this endpoint: https://tinyurl.com/problems-api#L223-L218
+    ///   Source code for this endpoint: https://tinyurl.com/problems-api#L223-L228
     /// </remarks>
     [HttpGet("conflicting")]
     [ProducesResponseType(409)]
