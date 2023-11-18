@@ -65,7 +65,7 @@ void ConfigureServices(IServiceCollection services)
             configure.PostProcess = document => {
                 document.Info.Version = "v1";
                 document.Info.Title = "ProblemDetailsDemo";
-                document.Info.Description = "ASP.NET Core 3.1 Problem Details demo";
+                document.Info.Description = "ASP.NET Core 6.0 Problem Details demo";
             };
         });
 

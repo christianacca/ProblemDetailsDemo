@@ -213,6 +213,19 @@ namespace ProblemDetailsDemo.Api.Controllers
     {
       return BadRequest("This will end up in the 'detail' field.");
     }
+    
+    /// <summary>
+    ///   Example of returning a <see cref="ConflictResult"/> with a message string
+    /// </summary>
+    /// <remarks>
+    ///   Source code for this endpoint: https://tinyurl.com/problems-api#L223-L218
+    /// </remarks>
+    [HttpGet("conflicting")]
+    [ProducesResponseType(409)]
+    public ActionResult Conflicting()
+    {
+      return Conflict("This will end up in the 'detail' field.");
+    }
 
     /// <summary>
     ///   Return a null
@@ -226,7 +239,7 @@ namespace ProblemDetailsDemo.Api.Controllers
     ///     ProblemDetails response
     ///   </para>
     ///   <para>
-    ///     Source code for this endpoint: https://tinyurl.com/problems-api#L232-L242
+    ///     Source code for this endpoint: https://tinyurl.com/problems-api#L245-L255
     ///   </para>
     /// </remarks>
     [HttpGet("missing-resource")]
