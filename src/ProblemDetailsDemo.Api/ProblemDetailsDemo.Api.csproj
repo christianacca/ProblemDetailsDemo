@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CcAcca.LogDimensionCollection.AppInsights" Version="3.0.0-beta.2" />
-    <PackageReference Include="CcAcca.LogDimensionCollection.AspNetCore" Version="3.0.0-beta.2" />
-    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.4.0" />
+    <PackageReference Include="CcAcca.LogDimensionCollection.AppInsights" Version="3.0.0" />
+    <PackageReference Include="CcAcca.LogDimensionCollection.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
-    <PackageReference Include="CcAcca.ApplicationInsights.ProblemDetails" Version="2.0.0-beta.2" />
+    <PackageReference Include="CcAcca.ApplicationInsights.ProblemDetails" Version="2.0.0" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.20.0" />
   </ItemGroup>
