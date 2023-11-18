@@ -1,6 +1,4 @@
-﻿using System;
-using System.Data;
-using Microsoft.AspNetCore.Http;
+﻿using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using ProblemDetailsDemo.Api.ExampleMiddleware;
 
