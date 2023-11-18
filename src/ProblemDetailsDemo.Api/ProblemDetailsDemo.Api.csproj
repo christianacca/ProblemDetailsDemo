@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
 	<NoWarn>1701;1702;1591</NoWarn>
@@ -14,7 +15,6 @@
     <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.4.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
     <PackageReference Include="CcAcca.ApplicationInsights.ProblemDetails" Version="2.0.0-beta.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.175" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.20.0" />
   </ItemGroup>
