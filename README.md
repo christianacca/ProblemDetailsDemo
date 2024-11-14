@@ -30,4 +30,6 @@ how an MVC action result or raw middleware response is converted to a ProblemDet
 
 ## Contributing
 
-* [Azure devops home page](https://portal.azure.com/#@1fc77a15-c288-4b03-b784-6fe873fb256e/resource/subscriptions/44835aa1-a779-412a-8225-7422ff9a4f33/resourceGroups/VstsRG-christianacca-0ac1/providers/Microsoft.DevOps/pipelines/ProblemDetailsDemo)
+* [Github deployments](https://github.com/christianacca/ProblemDetailsDemo/actions/workflows/azure-webapps-dotnet-core.yml)
+* [Azure app service](https://portal.azure.com/#@christianaccaazuregmail.onmicrosoft.com/resource/subscriptions/d3f2602d-6ce5-4152-b7ca-082d56b2bf78/resourceGroups/rg-hellang-problemdetails-demo/providers/Microsoft.Web/serverFarms/hellang-problemdetails-demo/webHostingPlan)
+  * Entra-ID tenant: 2de591fe-203b-42ed-9c29-15aaa387b978; christianacca.azure@gmail.com
